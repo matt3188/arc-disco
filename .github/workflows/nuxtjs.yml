@@ -71,7 +71,7 @@ jobs:
       - name: Install dependencies
         run: cd app && ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Static HTML export with Nuxt
-        run: cd app && ${{ steps.detect-package-manager.outputs.manager }} run generate
+        run: cd app && npx nuxi generate
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
