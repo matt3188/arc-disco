@@ -31,8 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          path: /app
+      - name: Change to desired directory
+        run: cd app
       - name: Detect package manager
         id: detect-package-manager
         run: |
