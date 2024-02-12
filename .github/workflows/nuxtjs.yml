@@ -71,17 +71,14 @@ jobs:
           key: ${{ runner.os }}-nuxt-build-${{ hashFiles('dist') }}
           restore-keys: |
             ${{ runner.os }}-nuxt-build-
-      - name: Change and run commands in desired directory
-        run: |
-          cd app
-          - name: Install dependencies
-            run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-          - name: Static HTML export with Nuxt
-            run: ${{ steps.detect-package-manager.outputs.manager }} run generate
-          - name: Upload artifact
-            uses: actions/upload-pages-artifact@v3
-            with:
-              path: ./dist
+      - name: Install dependencies
+        run: cd app && ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      - name: Static HTML export with Nuxt
+        run: cd app && ${{ steps.detect-package-manager.outputs.manager }} run generate
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
 
   # Deployment job
   deploy:
